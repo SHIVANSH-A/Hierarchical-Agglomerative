@@ -6,9 +6,13 @@ body {
 h1 {
     color: #333;
 }
+form {
+    margin-bottom: 20px;
+}
 img {
     width: 80%;
     max-width: 600px;
     border: 2px solid #ddd;
     padding: 5px;
+    margin: 10px;
 }
