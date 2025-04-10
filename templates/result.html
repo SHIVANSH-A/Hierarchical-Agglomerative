@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clustering Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="results">
+    <header class="header">
+        <h1>Clustering Results</h1>
+        <p>See the intermediate steps and the final dendrogram below</p>
+    </header>
+
+    <div class="steps">
+        {% for step in steps %}
+        <div class="card">{{ step }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="dendrogram">
+        <img src="{{ url_for('static', filename='dendrogram.png') }}" alt="Dendrogram">
+    </div>
+
+    <a href="/" class="back">← Go Back</a>
+</body>
+</html>

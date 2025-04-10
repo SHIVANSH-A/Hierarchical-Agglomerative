@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f3f4f6;
+}
+
+.hero {
+    background: linear-gradient(145deg, #e4e8ff, #f8f9ff);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #1f1f1f;
+    text-align: center;
+    padding: 5rem 2rem;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.upload-form {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.upload-form input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.upload-form button {
+    margin-left: 1rem;
+    padding: 0.6rem 1.5rem;
+    background-color: white;
+    color: #7F00FF;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.upload-form button:hover {
+    background-color: #f0f0f0;
+}
+
+.results {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    font-size: 1rem;
+    color: #333;
+}
+
+.dendrogram {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #7F00FF;
+    text-decoration: none;
+}

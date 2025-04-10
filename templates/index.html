@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Clustering</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="hero">
+    <header class="header">
+        <h1>Smart Clustering</h1>
+        <p>Upload your dataset and generate a dendrogram</p>
+    </header>
+    <form action="/" method="POST" enctype="multipart/form-data" class="upload-form">
+        <input type="file" name="file" required>
+        <button type="submit">Generate Dendrogram</button>
+    </form>
+</body>
+</html>
