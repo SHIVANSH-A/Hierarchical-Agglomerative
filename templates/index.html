@@ -2,41 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hierarchical Clustering</title>
+    <title>Smart Clustering</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <h1>Upload a CSV File for Clustering</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
+<body class="hero">
+    <header class="header">
+        <h1>Smart Clustering</h1>
+        <p>Upload your dataset and generate a dendrogram</p>
+    </header>
+    <form action="/" method="POST" enctype="multipart/form-data" class="upload-form">
         <input type="file" name="file" required>
-        <button type="submit">Upload and Cluster</button>
+        <button type="submit">Generate Dendrogram</button>
     </form>
-    
-    {% if head %}
-        <h2>Uploaded Data (First 5 Rows)</h2>
-        {{ head | safe }}
-    {% endif %}
-
-    {% if steps %}
-        <h2>Clustering Steps</h2>
-        <ul>
-            {% for step in steps %}
-                <li>{{ step }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    {% if intermediate_plots %}
-        <h2>Intermediate Dendrograms</h2>
-        {% for plot in intermediate_plots %}
-            <img src="{{ plot }}" alt="Intermediate Dendrogram">
-        {% endfor %}
-    {% endif %}
-
-    {% if image_url %}
-        <h2>Final Dendrogram</h2>
-        <img src="{{ image_url }}" alt="Dendrogram">
-    {% endif %}
 </body>
 </html>
