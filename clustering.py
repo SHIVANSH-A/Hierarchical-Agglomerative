@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import dendrogram
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 import os
 
 def euclidean_distance(point1, point2):
@@ -46,13 +49,49 @@ def plot_dendrogram(linkage_matrix):
     plt.figure(figsize=(10, 6))
     dendrogram(linkage_matrix)
     plt.title("Hierarchical Clustering Dendrogram")
+    plt.tight_layout()
     plt.savefig("static/dendrogram.png")
     plt.close()
 
+def preprocess_data(df):
+    # Drop columns with all missing values
+    df = df.dropna(axis=1, how='all')
+    
+    # Drop rows with all missing values
+    df = df.dropna(axis=0, how='all')
+
+    # Fill remaining missing values with column mean (numeric) or mode (categorical)
+    for col in df.columns:
+        if df[col].dtype in [np.float64, np.int64]:
+            df[col].fillna(df[col].mean(), inplace=True)
+        else:
+            df[col].fillna(df[col].mode()[0], inplace=True)
+
+    # Detect numeric and categorical columns
+    numeric_features = df.select_dtypes(include=[np.number]).columns.tolist()
+    categorical_features = df.select_dtypes(include=['object', 'category', 'bool']).columns.tolist()
+
+    # Create transformer
+    transformer = ColumnTransformer(transformers=[
+        ('num', StandardScaler(), numeric_features),
+        ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+    ])
+
+    pipeline = Pipeline(steps=[('transform', transformer)])
+    data_transformed = pipeline.fit_transform(df)
+    
+    return data_transformed
+
 def run_clustering(csv_path):
     df = pd.read_csv(csv_path)
-    df_numeric = df.select_dtypes(include=[np.number])  # ignore non-numeric columns
-    data = df_numeric.values
-    linkage_matrix, steps = hierarchical_clustering(data)
+    if df.empty:
+        raise ValueError("The uploaded CSV file is empty or invalid.")
+    
+    data = preprocess_data(df)
+    
+    if data.shape[0] < 2:
+        raise ValueError("Need at least 2 samples for clustering.")
+
+    linkage_matrix, steps = hierarchical_clustering(data.toarray() if hasattr(data, 'toarray') else data)
     plot_dendrogram(linkage_matrix)
     return linkage_matrix, steps
