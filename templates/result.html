@@ -4,6 +4,34 @@
     <meta charset="UTF-8">
     <title>Clustering Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .dropdown-container {
+            margin: 1rem 0;
+        }
+        details {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 0.5rem;
+            margin-bottom: 10px;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .dendrogram img {
+            max-width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back {
+            display: inline-block;
+            margin-top: 2rem;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body class="results">
     <header class="header">
@@ -11,13 +39,18 @@
         <p>See the intermediate steps and the final dendrogram below</p>
     </header>
 
-    <div class="steps">
+    <div class="dropdown-container">
+        <h2>Intermediate Steps</h2>
         {% for step in steps %}
-        <div class="card">{{ step }}</div>
+        <details>
+            <summary>Step {{ loop.index }}</summary>
+            <p>{{ step }}</p>
+        </details>
         {% endfor %}
     </div>
 
     <div class="dendrogram">
+        <h2>Dendrogram</h2>
         <img src="{{ url_for('static', filename='dendrogram.png') }}" alt="Dendrogram">
     </div>
 
